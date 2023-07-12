@@ -17,7 +17,12 @@ class Plot(Display):
         self.ui.cm_combobox.addItems(ALL_CRYOMODULES)
         self.ui.suffix_line_edit.returnPressed.connect(self.update)
         self.ui.cm_combobox.currentIndexChanged.connect(self.update)
+        self.ui.second_spinbox.valueChanged.connect(self.update_time)
+        self.ui.plot.setShowLegend(True)
         
+    def update_time(self):
+        self.ui.plot.setTimeSpan(self.ui.second_spinbox.value())
+    
     def update(self):
         self.ui.plot.clear()
         
