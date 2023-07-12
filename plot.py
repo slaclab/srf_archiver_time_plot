@@ -24,7 +24,7 @@ class Plot(Display):
         self.ui.plot.setTimeSpan(self.ui.second_spinbox.value())
     
     def update(self):
-        self.ui.plot.clear()
+        self.ui.plot.clearCurves()
         
         cm_obj = CRYOMODULE_OBJECTS[self.ui.cm_combobox.currentText()]
         
