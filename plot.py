@@ -1,3 +1,4 @@
+from PyQt5.QtCore import pyqtSlot
 from pydm import Display
 from lcls_tools.superconducting.sc_linac_utils import ALL_CRYOMODULES
 from lcls_tools.superconducting.scLinac import CRYOMODULE_OBJECTS
@@ -19,9 +20,11 @@ class Plot(Display):
         self.ui.cm_combobox.currentIndexChanged.connect(self.update)
         self.ui.second_spinbox.valueChanged.connect(self.update_time)
         self.ui.plot.setShowLegend(True)
+        self.ui.autoscale_checkbox.stateChanged.connect(self.update)
         
     def update_time(self):
         self.ui.plot.setTimeSpan(self.ui.second_spinbox.value())
+    
     
     def update(self):
         self.ui.plot.clearCurves()
@@ -31,5 +34,8 @@ class Plot(Display):
         for cavity in cm_obj.cavities.values():
             self.ui.plot.addYChannel(y_channel=cavity.pv_addr(self.ui.suffix_line_edit.text()),
                                      useArchiveData=True)
-
-    
+            
+        if not self.ui.autoscale_checkbox.isChecked():
+            self.ui.plot.setAutoRangeY(False)
+            self.ui.plot.setMinYRange(self.ui.ymin_spinbox.value())
+            self.ui.plot.setMaxYRange(self.ui.ymax_spinbox.value())
