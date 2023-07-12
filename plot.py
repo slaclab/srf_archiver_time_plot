@@ -1,5 +1,6 @@
 from typing import Dict
 
+from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QCheckBox
 from lcls_tools.superconducting.scLinac import CRYOMODULE_OBJECTS
 from lcls_tools.superconducting.sc_linac_utils import ALL_CRYOMODULES
@@ -30,6 +31,9 @@ class Plot(Display):
                                                           self.ui.c6_checkbox: 6,
                                                           self.ui.c7_checkbox: 7,
                                                           self.ui.c8_checkbox: 8}
+        
+        for checkbox in self.cavity_checkbox_map.keys():
+            checkbox.stateChanged.connect(self.update)
     
     @property
     def selected_cavities(self):
@@ -41,9 +45,11 @@ class Plot(Display):
         
         return selected_cavities
     
+    @pyqtSignal
     def update_time(self):
         self.ui.plot.setTimeSpan(self.ui.second_spinbox.value())
     
+    @pyqtSignal
     def update(self):
         self.ui.plot.clearCurves()
         
