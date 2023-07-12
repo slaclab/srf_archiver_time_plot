@@ -52,7 +52,7 @@
     <widget class="QLineEdit" name="suffix_line_edit"/>
    </item>
    <item row="1" column="8">
-    <widget class="QDoubleSpinBox" name="yim_spinbox">
+    <widget class="QDoubleSpinBox" name="ymin_spinbox">
      <property name="minimum">
       <double>-500000.000000000000000</double>
      </property>
