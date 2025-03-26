@@ -5,6 +5,7 @@ from pydm import Display
 
 from lcls_tools.superconducting.sc_linac import MACHINE
 from lcls_tools.superconducting.sc_linac_utils import ALL_CRYOMODULES
+from pydm.widgets import PyDMTimePlot
 
 
 class Plot(Display):
@@ -51,7 +52,8 @@ class Plot(Display):
         self.ui.plot.setTimeSpan(self.ui.second_spinbox.value())
 
     def update(self):
-        self.ui.plot.clearCurves()
+        plot: PyDMTimePlot = self.ui.plot
+        plot.clearCurves()
 
         cm_obj = MACHINE.cryomodules[self.ui.cm_combobox.currentText()]
 
