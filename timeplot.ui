@@ -217,7 +217,7 @@
     </layout>
    </item>
    <item>
-    <widget class="PyDMArchiverTimePlot" name="plot">
+    <widget class="PyDMTimePlot" name="plot">
      <property name="toolTip">
       <string/>
      </property>
